@@ -1,7 +1,7 @@
 # Build command:
-# docker build -t moriorgames/agent-smith .
+# docker build -t moriorgames/agent-lib .
 # Run command:
-# docker run -td --name agent_smith -p 9090:9090 moriorgames/agent-smith
+# docker run -td --name agent_smith -p 9090:9090 moriorgames/agent-lib
 FROM        golang:1.10.3-alpine3.8
 MAINTAINER  MoriorGames "moriorgames@gmail.com"
 
@@ -20,6 +20,6 @@ RUN         apk update && apk upgrade && \
 RUN         go build -o bin/main src/*.go
 
 # Expose ports
-EXPOSE      8090
+EXPOSE      9090
 
 ENTRYPOINT  ["./bin/main"]
