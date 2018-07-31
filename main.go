@@ -1,18 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
-	"github.com/gorilla/mux"
+	"github.com/moriorgames/agent-smith/src"
 )
 
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", Index)
+	router := createRouter()
 	log.Fatal(http.ListenAndServe(":9090", router))
-}
-
-func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello Smith")
 }
