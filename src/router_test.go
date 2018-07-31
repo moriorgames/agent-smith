@@ -6,7 +6,7 @@ import (
 )
 
 func TestCreateRouter(t *testing.T) {
-	if reflect.TypeOf(createRouter()).String() != "*mux.Router" {
+	if reflect.TypeOf(CreateRouter()).String() != "*mux.Router" {
 		t.Error("Assertion error")
 	}
 }

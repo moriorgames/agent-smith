@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	router := createRouter()
+	router := smith.CreateRouter()
 	log.Fatal(http.ListenAndServe(":9090", router))
 }
