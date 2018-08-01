@@ -1,10 +1,19 @@
+{{define "base"}}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{block "title" .}}Agent Smith panel{{end}}</title>
+{{block "css" .}}{{end}}
 </head>
 <body>
-
+<div class="container-fluid page-body-wrapper">
+{{block "sidebar" .}}{{end}}
+    <div class="main-panel">
+    {{template "content" .}}
+    {{block "footer" .}}{{end}}
+    </div>
+</div>
+{{block "js" .}}{{end}}
 </body>
 </html>
+{{end}}
