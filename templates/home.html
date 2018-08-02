@@ -1,6 +1,5 @@
 {{define "title"}}Agent Smith Panel{{end}}
 {{define "content"}}
-
 <div class="content-wrapper">
     <div class="row">
         <div class="col-lg-12 grid-margin">
@@ -11,25 +10,21 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>ContainerID</th>
-                                <th>Image</th>
-                                <th>Progress</th>
-                                <th>Ports</th>
-                                <th>Status</th>
+                                <th>CONTAINER ID</th>
+                                <th>IP</th>
+                                <th>IMAGE</th>
+                                <th>IMAGE CREATED</th>
+                                <th>PORTS</th>
+                                <th>STATUS</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="font-weight-medium">00be2f65bd26</td>
+                                <td class="font-weight-medium">47f81b1e9f67</td>
+                                <td>127.0.0.1</td>
                                 <td>api-catalog</td>
-                                <td>
-                                    <div class="progress">
-                                        <div style="width: 25%" class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    8080:8080
-                                </td>
+                                <td>3 minutes ago</td>
+                                <td>0.0.0.0:9090->9090/tcp</td>
                                 <td class="text-danger">Running</td>
                             </tr>
                             </tbody>
@@ -41,6 +36,3 @@
     </div>
 </div>
 {{end}}
-
-
-{{/*progress-bar bg-success progress-bar-striped progress-bar-animated*/}}
