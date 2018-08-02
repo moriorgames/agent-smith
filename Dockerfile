@@ -17,6 +17,7 @@ RUN         apk update \
             && go get -u github.com/gorilla/mux \
             && go get -u github.com/oxtoacart/bpool \
             && go get -u github.com/moriorgames/agent-smith/src \
+            && go get -u github.com/go-redis/redis \
             && apk del git
 
 # Compile application in a single binary

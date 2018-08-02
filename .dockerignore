@@ -5,7 +5,7 @@
 dump.rdb
 
 # Binaries for programs and plugins
-main
+public/main
 *.exe
 *.exe~
 *.dll

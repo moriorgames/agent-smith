@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  agent:
+    image: moriorgames/agent-smith
+    container_name: agent_smith
+    ports:
+    - "9090:9090"
+    links:
+    - redis:redis
+
+  redis:
+    image: redis
+    container_name: docker_redis
+    ports:
+    - "6379:6379"
