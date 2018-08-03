@@ -2,16 +2,27 @@ package smith
 
 import (
 	"github.com/go-redis/redis"
-	"fmt"
 )
 
-func ExampleNewClient() {
-	client := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+type RedisConnectable interface {
+	Ping() (string, error)
+	Close() error
+}
+
+type Redis struct {
+	client *redis.Client
+}
+
+func (r *Redis) Ping() (string, error) {
+	return r.client.Ping().Result()
+}
+
+func ConnectToRedis(r *Redis) (string, error) {
+	r.client = redis.NewClient(&redis.Options{
+		Addr:     "127.0.0.1:6379",
 		Password: "",
-		DB:       0,
+		DB:       5,
 	})
 
-	pong, err := client.Ping().Result()
-	fmt.Println(pong, err)
+	return r.client.Ping().Result()
 }
