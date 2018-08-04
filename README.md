@@ -1,6 +1,8 @@
-# agent-smith
+Agent Smith
+===========
 
-A server to perform container deploy on aws. It can be considered as a cloud agent, the last step after a pipeline has been built.
+A server to perform shipping containers on AWS with a web tool.
+It can be considered as a cloud agent, the last step after a continuous integration pipeline has been built.
 
 # Build, Run and Test
 

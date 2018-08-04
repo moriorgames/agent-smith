@@ -6,7 +6,6 @@ import (
 
 type RedisConnectable interface {
 	Ping() (string, error)
-	Close() error
 }
 
 type Redis struct {

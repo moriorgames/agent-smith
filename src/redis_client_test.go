@@ -2,48 +2,49 @@ package smith
 
 import (
 	"testing"
-	"fmt"
 	"errors"
 )
 
 type RedisMock struct {
-	PingFunc  func() (string, error)
-	CloseFunc func() error
+	result string
+	err    error
 }
 
 func (r *RedisMock) Ping() (string, error) {
-	if r.PingFunc != nil {
-		return r.Ping()
-	}
 
-	return "", fmt.Errorf("error")
+	return r.result, r.err
 }
 
-func (r *RedisMock) Close() error {
-	return fmt.Errorf("error")
-}
-
-func TestRedisClientIsAbleToConnect(t *testing.T) {
+func TestInterfaceRedisConnectable(t *testing.T) {
 
 	tests := map[string]struct {
-		redisClient RedisConnectable
-		item        string
-		err         error
+		mockClient     RedisConnectable
+		expectedResult string
+		expectedErr    error
 	}{
 		"successful": {
-			&RedisMock{},
-			"foo",
+			&RedisMock{
+				result: "PONG",
+				err:    nil,
+			},
+			"PONG",
+			nil,
+		},
+		"failure": {
+			&RedisMock{
+				result: "",
+				err:    errors.New("dial tcp 127.0.0.1:6379: connect: connection refused"),
+			},
+			"",
 			errors.New("dial tcp 127.0.0.1:6379: connect: connection refused"),
 		},
 	}
 
 	for name, test := range tests {
 		t.Logf("Running test case: %s", name)
-
-		result, _ := test.redisClient.Ping()
-		t.Logf("Result: %s", result)
-		//if result != "foo" {
-		//	t.Fail()
-		//}
+		result, err := test.mockClient.Ping()
+		if result != test.expectedResult && err != test.expectedErr {
+			t.Fail()
+		}
 	}
 }
