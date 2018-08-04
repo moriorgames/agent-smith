@@ -3,6 +3,7 @@ package smith
 import (
 	"testing"
 	"errors"
+	"time"
 )
 
 type RedisMock struct {
@@ -11,8 +12,19 @@ type RedisMock struct {
 }
 
 func (r *RedisMock) Ping() (string, error) {
-
 	return r.result, r.err
+}
+
+func (r *RedisMock) Set(key string, value string, expr time.Duration) (string, error) {
+	return r.result, r.err
+}
+
+func (r *RedisMock) Get(key string) (string, error) {
+	return r.result, r.err
+}
+
+func (r *RedisMock) Del(key string) (int64, error) {
+	return 1, r.err
 }
 
 func TestInterfaceRedisConnectable(t *testing.T) {
@@ -51,6 +63,10 @@ func TestInterfaceRedisConnectable(t *testing.T) {
 
 func TestIsNotAbleToConnectToRedis(t *testing.T) {
 
+	if !testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+
 	redisClient := ConnectToRedis()
 	result, err := redisClient.Ping()
 	t.Logf("Result: %s Error %s", result, err)
@@ -69,6 +85,48 @@ func TestIsAbleToConnectToRedis(t *testing.T) {
 	result, err := redisClient.Ping()
 	t.Logf("Result: %s Error %s", result, err)
 	if err != nil && result != "PONG" {
+		t.Fail()
+	}
+}
+
+func TestIsAbleToSetKeyOnRedis(t *testing.T) {
+
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+
+	redisClient := ConnectToRedis()
+	result, err := redisClient.Set("test_key", "fake_value", 0)
+	t.Logf("Result: %s Error %s", result, err)
+	if err != nil {
+		t.Fail()
+	}
+}
+
+func TestIsAbleToGetKeyOnRedis(t *testing.T) {
+
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+
+	redisClient := ConnectToRedis()
+	result, err := redisClient.Get("test_key")
+	t.Logf("Result: %s Error %s", result, err)
+	if result != "fake_value" {
+		t.Fail()
+	}
+}
+
+func TestIsAbleToDeleteOneKeyOnRedis(t *testing.T) {
+
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+
+	redisClient := ConnectToRedis()
+	result, err := redisClient.Del("test_key")
+	t.Logf("Result: %q Error %s", result, err)
+	if result != 1 {
 		t.Fail()
 	}
 }
