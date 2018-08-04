@@ -14,4 +14,6 @@ $ go build -o public/main public/main.go && cd public && ./main
 $ go run public/maingo
 # Testing the project
 $ go test ./src -v
+# Golang testing in short mode
+$ go test ./src -v -short
 ```

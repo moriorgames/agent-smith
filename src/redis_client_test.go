@@ -33,10 +33,10 @@ func TestInterfaceRedisConnectable(t *testing.T) {
 		"failure": {
 			&RedisMock{
 				result: "",
-				err:    errors.New("dial tcp 127.0.0.1:6379: connect: connection refused"),
+				err:    errors.New("dial tcp host:port: connect: connection refused"),
 			},
 			"",
-			errors.New("dial tcp 127.0.0.1:6379: connect: connection refused"),
+			errors.New("dial tcp host:port: connect: connection refused"),
 		},
 	}
 
@@ -46,5 +46,29 @@ func TestInterfaceRedisConnectable(t *testing.T) {
 		if result != test.expectedResult && err != test.expectedErr {
 			t.Fail()
 		}
+	}
+}
+
+func TestIsNotAbleToConnectToRedis(t *testing.T) {
+
+	redisClient := ConnectToRedis()
+	result, err := redisClient.Ping()
+	t.Logf("Result: %s Error %s", result, err)
+	if err == nil {
+		t.Fail()
+	}
+}
+
+func TestIsAbleToConnectToRedis(t *testing.T) {
+
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+
+	redisClient := ConnectToRedis()
+	result, err := redisClient.Ping()
+	t.Logf("Result: %s Error %s", result, err)
+	if err != nil && result != "PONG" {
+		t.Fail()
 	}
 }
