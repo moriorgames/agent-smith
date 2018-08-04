@@ -1,0 +1,23 @@
+sudo: required
+
+language: go
+
+env:
+- IMAGE="moriorgames/agent-smith"
+
+services:
+- docker
+
+before_install:
+- docker pull $IMAGE
+- docker build -t $IMAGE .
+- docker run -td --name agent_smith -p 9090:9090 $IMAGE
+
+script: docker exec -ti agent_smith bash -c 'go test ./src -v -short'
+
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- docker tag $IMAGE "${IMAGE}:${TRAVIS_COMMIT}"
+- docker tag $IMAGE "${IMAGE}:latest"
+- docker push "${IMAGE}:latest"
+- docker push "${IMAGE}:${TRAVIS_COMMIT}"
