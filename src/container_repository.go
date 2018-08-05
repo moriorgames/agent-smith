@@ -12,7 +12,6 @@ func (c *ContainerRepo) FindByID(id string) (*Container, error) {
 	data, err := c.redis.Get(id)
 	bytes := []byte(data)
 	container := new(Container)
-
 	json.Unmarshal(bytes, &container)
 
 	return container, err
