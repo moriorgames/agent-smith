@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func TestRepositoryIsAbleToPersistModel(t *testing.T) {
+func TestRepositoryIsAbleFindModel(t *testing.T) {
 	mockClient := new(RedisMock)
 	mockClient.result = `{
         "id":"fake-uuid",
@@ -30,4 +30,37 @@ func TestRepositoryIsAbleToPersistModel(t *testing.T) {
 	assert.Equal(t, container.CreatedAt, createdAt, "Values must be Equal.")
 	assert.Equal(t, container.Ports, "8080:8080", "Values must be Equal.")
 	assert.Equal(t, container.Status, true, "Values must be Equal.")
+}
+
+func TestRepositoryIsAbleToPersistModel(t *testing.T) {
+	mockClient := new(RedisMock)
+	mockClient.result = "none"
+	mockClient.err = nil
+
+	container := new(Container)
+	createdAt, _ := time.Parse(time.RFC3339, "2018-08-08T22:00:00.0+02:00")
+	container.ID = "fake-uuid"
+	container.Name = "container_name"
+	container.Ip = "some_ip"
+	container.CreatedAt = createdAt
+	container.Ports = "8080:8080"
+	container.Status = true
+
+	containerRepository := NewContainerRepository(mockClient)
+	result := containerRepository.Persist(container)
+
+	assert.Equal(t, result, nil, "Values must be Equal.")
+}
+
+func TestRepositoryIsNotAbleToPersistModel(t *testing.T) {
+	mockClient := new(RedisMock)
+	mockClient.result = "none"
+	mockClient.err = errors.New("error")
+
+	container := new(Container)
+
+	containerRepository := NewContainerRepository(mockClient)
+	result := containerRepository.Persist(container)
+
+	assert.Equal(t, result, errors.New("error"), "Values must be Equal.")
 }
