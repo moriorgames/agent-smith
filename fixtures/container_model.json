@@ -1,0 +1,1 @@
+{"id": "fake-uuid", "name": "container_name", "ip": "some_ip", "created_at": "2018-08-08 00:00:00", "ports": "8080:8080", "status": true}

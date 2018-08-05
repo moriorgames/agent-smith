@@ -13,7 +13,7 @@ before_install:
 - docker build -t $IMAGE .
 - docker run -td --name agent_smith -p 9090:9090 $IMAGE
 
-script: docker exec -ti agent_smith bash -c 'go test ./src -v -short'
+script: docker exec -ti agent_smith bash -c 'go test ../src -v -short'
 
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
