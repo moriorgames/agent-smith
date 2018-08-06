@@ -1,46 +1,31 @@
 {{define "title"}}Agent Smith Panel{{end}}
 {{define "content"}}
 <div class="content-wrapper">
-    <div class="row">
-        <div class="col-lg-12 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Containers</h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>CONTAINER</th>
-                                <th>IP</th>
-                                <th>IMAGE CREATED</th>
-                                <th>PORTS</th>
-                                <th>STATUS</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="font-bold">api-catalog</td>
-                                <td>127.0.0.1</td>
-                                <td>3 minutes ago</td>
-                                <td>9090:9090</td>
-                                <td class="text-success font-bold">Running</td>
-                                <td>
-                                    <button class="btn btn-success btn-block">Actions</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold">website</td>
-                                <td>127.0.0.2</td>
-                                <td>6 days ago</td>
-                                <td>80:80/443:443</td>
-                                <td class="text-danger font-bold">Stopped</td>
-                                <td>
-                                    <button class="btn btn-success btn-block">Actions</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+    <div class="col-md-12 grid-margin">
+        <div class="row flex-grow">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Container edition</h4>
+                        <p class="card-description">
+                            Create or edit your containers with mandatory data to create a deployment.
+                        </p>
+                        <form class="forms-sample" method="post" action="">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Container name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Ip</label>
+                                <input type="text" class="form-control" name="ip" placeholder="127.0.0.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Ports</label>
+                                <input type="text" class="form-control" name="ports" placeholder="8080:8080">
+                            </div>
+                            <button type="submit" class="btn btn-success mr-2">Submit</button>
+                            <a class="btn btn-light" href="/">Cancel</a>
+                        </form>
                     </div>
                 </div>
             </div>
