@@ -12,6 +12,8 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 	mockClient.result = `{
         "id":"fake-uuid",
         "name":"container_name",
+        "image":"container_image",
+        "tag":"latest",
         "ip":"some_ip",
         "created_at":"2018-08-08T22:00:00.0+02:00",
         "ports":"8080:8080",
@@ -24,12 +26,14 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 
 	createdAt, _ := time.Parse(time.RFC3339, "2018-08-08T22:00:00.0+02:00")
 
-	assert.Equal(t, container.ID, "fake-uuid", "Values must be Equal.")
-	assert.Equal(t, container.Name, "container_name", "Values must be Equal.")
-	assert.Equal(t, container.Ip, "some_ip", "Values must be Equal.")
-	assert.Equal(t, container.CreatedAt, createdAt, "Values must be Equal.")
-	assert.Equal(t, container.Ports, "8080:8080", "Values must be Equal.")
-	assert.Equal(t, container.Status, true, "Values must be Equal.")
+	assert.Equal(t, container.ID, "fake-uuid")
+	assert.Equal(t, container.Name, "container_name")
+	assert.Equal(t, container.Image, "container_image")
+	assert.Equal(t, container.Tag, "latest")
+	assert.Equal(t, container.Ip, "some_ip")
+	assert.Equal(t, container.CreatedAt, createdAt)
+	assert.Equal(t, container.Ports, "8080:8080")
+	assert.Equal(t, container.Status, true)
 }
 
 func TestRepositoryIsAbleToPersistModel(t *testing.T) {

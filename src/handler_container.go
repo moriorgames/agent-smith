@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"bytes"
 	"net/http"
+	"github.com/gorilla/mux"
 )
 
-func renderContainerContent() string {
+func renderContainerContent(id string) string {
 	loadTemplateConfig()
 	loadTemplates()
 	buf := new(bytes.Buffer)
@@ -16,5 +17,6 @@ func renderContainerContent() string {
 }
 
 func ViewContainer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, renderContainerContent())
+	id := mux.Vars(r)["id"]
+	fmt.Fprintf(w, renderContainerContent(id))
 }

@@ -6,6 +6,7 @@ func CreateRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", ViewHome)
 	router.HandleFunc("/container", ViewContainer)
+	router.HandleFunc("/container/{id}", ViewContainer)
 	router.HandleFunc("/static/css/{file}", StaticCss)
 	router.HandleFunc("/static/js/{file}", StaticJs)
 	router.HandleFunc("/static/img/{file}", StaticImg)
