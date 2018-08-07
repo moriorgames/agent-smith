@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"io/ioutil"
+	"log"
 )
 
 const CssPath string = "../static/css/"
@@ -13,15 +14,16 @@ const ImgPath string = "../static/img/"
 func StaticCss(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	filename := vars["file"]
+	log.Println("Static css handler filename: " + filename)
 	data, err := ioutil.ReadFile(string(CssPath + filename))
 
 	if err == nil {
 		w.Header().Set("Content-Type", "text/css")
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusOK)
 		w.Write(data)
 	} else {
-		w.WriteHeader(404)
-		w.Write([]byte("404 CSS File " + http.StatusText(404)))
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 CSS File " + http.StatusText(http.StatusNotFound)))
 	}
 }
 
@@ -32,11 +34,11 @@ func StaticJs(w http.ResponseWriter, r *http.Request) {
 
 	if err == nil {
 		w.Header().Set("Content-Type", "application/javascript")
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusOK)
 		w.Write(data)
 	} else {
-		w.WriteHeader(404)
-		w.Write([]byte("404 JS File " + http.StatusText(404)))
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 JS File " + http.StatusText(http.StatusNotFound)))
 	}
 }
 
@@ -47,10 +49,10 @@ func StaticImg(w http.ResponseWriter, r *http.Request) {
 
 	if err == nil {
 		w.Header().Set("Content-Type", "image/jpg")
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusOK)
 		w.Write(data)
 	} else {
-		w.WriteHeader(404)
-		w.Write([]byte("404 JPG File " + http.StatusText(404)))
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 JPG File " + http.StatusText(http.StatusNotFound)))
 	}
 }
