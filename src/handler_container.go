@@ -22,13 +22,11 @@ func ViewContainer(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateContainer(w http.ResponseWriter, r *http.Request) {
-	//id := mux.Vars(r)["id"]
-	//router := CreateRouter()
-	//newUrl, _ := router.Get("app_edit_container").URL("id", id)
-	//newUrl.String()
+	id := mux.Vars(r)["id"]
+	router := CreateRouter()
+	newUrl, _ := router.Get("app_edit_container").URL("id", id)
 
 	// Save container
 
-	w.WriteHeader(http.StatusSeeOther)
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	http.Redirect(w, r, newUrl.String(), http.StatusSeeOther)
 }
