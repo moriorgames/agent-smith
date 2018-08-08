@@ -1,15 +1,4 @@
 mode: set
-github.com/moriorgames/agent-smith/src/container_repository.go:12.65,19.2 5 1
-github.com/moriorgames/agent-smith/src/container_repository.go:21.63,23.16 2 1
-github.com/moriorgames/agent-smith/src/container_repository.go:27.2,28.16 2 1
-github.com/moriorgames/agent-smith/src/container_repository.go:32.2,32.12 1 1
-github.com/moriorgames/agent-smith/src/container_repository.go:23.16,25.3 1 0
-github.com/moriorgames/agent-smith/src/container_repository.go:28.16,30.3 1 1
-github.com/moriorgames/agent-smith/src/container_repository.go:39.68,44.2 3 1
-github.com/moriorgames/agent-smith/src/handler_container.go:10.47,17.2 5 0
-github.com/moriorgames/agent-smith/src/handler_container.go:19.60,22.2 2 0
-github.com/moriorgames/agent-smith/src/handler_home.go:9.33,16.2 5 0
-github.com/moriorgames/agent-smith/src/handler_home.go:18.55,20.2 1 0
 github.com/moriorgames/agent-smith/src/handler_static.go:13.56,18.16 4 1
 github.com/moriorgames/agent-smith/src/handler_static.go:18.16,22.3 3 1
 github.com/moriorgames/agent-smith/src/handler_static.go:22.8,25.3 2 1
@@ -24,7 +13,7 @@ github.com/moriorgames/agent-smith/src/redis_client.go:19.83,21.2 1 0
 github.com/moriorgames/agent-smith/src/redis_client.go:23.49,25.2 1 0
 github.com/moriorgames/agent-smith/src/redis_client.go:27.48,29.2 1 0
 github.com/moriorgames/agent-smith/src/redis_client.go:35.40,44.2 3 1
-github.com/moriorgames/agent-smith/src/router.go:5.33,15.2 8 1
+github.com/moriorgames/agent-smith/src/router.go:5.33,23.2 9 1
 github.com/moriorgames/agent-smith/src/templating.go:22.27,25.2 2 0
 github.com/moriorgames/agent-smith/src/templating.go:27.22,28.22 1 0
 github.com/moriorgames/agent-smith/src/templating.go:32.2,33.16 2 0
@@ -44,3 +33,15 @@ github.com/moriorgames/agent-smith/src/templating.go:70.2,74.16 4 0
 github.com/moriorgames/agent-smith/src/templating.go:78.2,78.16 1 0
 github.com/moriorgames/agent-smith/src/templating.go:66.9,68.3 1 0
 github.com/moriorgames/agent-smith/src/templating.go:74.16,76.3 1 0
+github.com/moriorgames/agent-smith/src/container_repository.go:12.65,19.2 5 1
+github.com/moriorgames/agent-smith/src/container_repository.go:21.63,23.16 2 1
+github.com/moriorgames/agent-smith/src/container_repository.go:27.2,28.16 2 1
+github.com/moriorgames/agent-smith/src/container_repository.go:32.2,32.12 1 1
+github.com/moriorgames/agent-smith/src/container_repository.go:23.16,25.3 1 0
+github.com/moriorgames/agent-smith/src/container_repository.go:28.16,30.3 1 1
+github.com/moriorgames/agent-smith/src/container_repository.go:39.68,44.2 3 1
+github.com/moriorgames/agent-smith/src/handler_container.go:10.47,17.2 5 0
+github.com/moriorgames/agent-smith/src/handler_container.go:19.60,22.2 2 0
+github.com/moriorgames/agent-smith/src/handler_container.go:24.62,33.2 5 1
+github.com/moriorgames/agent-smith/src/handler_home.go:9.33,16.2 5 0
+github.com/moriorgames/agent-smith/src/handler_home.go:18.55,20.2 1 0
