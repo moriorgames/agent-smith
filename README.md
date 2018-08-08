@@ -21,5 +21,6 @@ $ go test ./src -v -run TestIsAbleToSetKeyOnRedis | sed ''/PASS/s//$(printf "\03
 # Code coverage on go
 # REPLACE: _/Users/morior/Development/agent-smith TO github.com/moriorgames/agent-smith
 $ go test ./src -v -short -coverprofile=coverage/output.out
+$ sed -i -e 's/_\/Users\/morior\/Development/github.com\/moriorgames/g' coverage/output.out
 $ go tool cover -html=coverage/output.out -o coverage/output.html 
 ```

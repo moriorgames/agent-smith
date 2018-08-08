@@ -7,28 +7,28 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//func TestStaticCssIsAbleToParseFile(t *testing.T) {
-//	req, err := http.NewRequest("GET", "custom.css", nil)
-//	if err != nil {
-//		t.Fatal(err)
-//	}
-//
-//	rr := httptest.NewRecorder()
-//	handler := http.HandlerFunc(StaticCss)
-//	handler.ServeHTTP(rr, req)
-//
-//	assert.Equal(t, rr.Code, http.StatusOK)
-//}
-
-func TestStaticCssIsNOTAbleToParseFile(t *testing.T) {
-	req, err := http.NewRequest("GET", "fake.css", nil)
+func TestStaticCssIsAbleToParseFile(t *testing.T) {
+	req, err := http.NewRequest("GET", "/static/css/custom.css", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(StaticCss)
-	handler.ServeHTTP(rr, req)
+	router := CreateRouter()
+	router.ServeHTTP(rr, req)
+
+	assert.Equal(t, rr.Code, http.StatusOK)
+}
+
+func TestStaticCssIsNOTAbleToParseFile(t *testing.T) {
+	req, err := http.NewRequest("GET", "/static/css/fake.css", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	router := CreateRouter()
+	router.ServeHTTP(rr, req)
 
 	assert.Equal(t, rr.Code, http.StatusNotFound)
 }
