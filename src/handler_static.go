@@ -4,8 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"io/ioutil"
-	"log"
-)
+	)
 
 const CssPath string = "../static/css/"
 const JsPath string = "../static/js/"
@@ -14,7 +13,6 @@ const ImgPath string = "../static/img/"
 func StaticCss(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	filename := vars["file"]
-	log.Println("Static css handler filename: " + filename)
 	data, err := ioutil.ReadFile(string(CssPath + filename))
 
 	if err == nil {

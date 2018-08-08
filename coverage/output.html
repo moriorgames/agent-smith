@@ -60,7 +60,7 @@
 				
 				<option value="file2">github.com/moriorgames/agent-smith/src/handler_home.go (0.0%)</option>
 				
-				<option value="file3">github.com/moriorgames/agent-smith/src/handler_static.go (35.7%)</option>
+				<option value="file3">github.com/moriorgames/agent-smith/src/handler_static.go (100.0%)</option>
 				
 				<option value="file4">github.com/moriorgames/agent-smith/src/redis_client.go (57.1%)</option>
 				
@@ -182,49 +182,49 @@ const CssPath string = "../static/css/"
 const JsPath string = "../static/js/"
 const ImgPath string = "../static/img/"
 
-func StaticCss(w http.ResponseWriter, r *http.Request) {
+func StaticCss(w http.ResponseWriter, r *http.Request) <span class="cov8" title="1">{
         vars := mux.Vars(r)
         filename := vars["file"]
         data, err := ioutil.ReadFile(string(CssPath + filename))
 
-        if err == nil {
+        if err == nil </span><span class="cov8" title="1">{
                 w.Header().Set("Content-Type", "text/css")
-                w.WriteHeader</span><span class="cov8" title="1">(200)
+                w.WriteHeader(200)
                 w.Write(data)
-        } else {
+        }</span> else<span class="cov8" title="1"> {
                 w.WriteHeader(404)
-                </span>w.Wri<span class="cov8" title="1">te([]byte("404 CSS File " + http.StatusText(404)))
-        }
+                w.Write([]byte("404 CSS File " + http.StatusText(404)))
+        }</span>
 }
 
-</span>func StaticJs(w http.ResponseWriter, r *http.Request) {
+func StaticJs(w http.ResponseWriter, r *http.Request) <span class="cov8" title="1">{
         vars := mux.Vars(r)
         filename := vars["file"]
         data, err := ioutil.ReadFile(string(JsPath + filename))
 
-        if err == nil {
+        if err == nil </span><span class="cov8" title="1">{
                 w.Header().Set("Content-Type", "application/javascript")
-                w.WriteHeader</span><span class="cov0" title="0">(200)
+                w.WriteHeader(200)
                 w.Write(data)
-        } else {
+        }</span> else<span class="cov8" title="1"> {
                 w.WriteHeader(404)
-                </span>w.Wri<span class="cov0" title="0">te([]byte("404 JS File " + http.StatusText(404)))
-        }
+                w.Write([]byte("404 JS File " + http.StatusText(404)))
+        }</span>
 }
 
-</span>func StaticImg(w http.ResponseWriter, r *http.Request) {
+func StaticImg(w http.ResponseWriter, r *http.Request) <span class="cov8" title="1">{
         vars := mux.Vars(r)
         filename := vars["file"]
         data, err := ioutil.ReadFile(string(ImgPath + filename))
 
-        if err == nil {
+        if err == nil </span><span class="cov8" title="1">{
                 w.Header().Set("Content-Type", "image/jpg")
-                w.WriteHeader</span><span class="cov0" title="0">(200)
+                w.WriteHeader(200)
                 w.Write(data)
-        } else {
+        }</span> else<span class="cov8" title="1"> {
                 w.WriteHeader(404)
-                </span>w.Wri<span class="cov0" title="0">te([]byte("404 JPG File " + http.StatusText(404)))
-        }
+                w.Write([]byte("404 JPG File " + http.StatusText(404)))
+        }</span>
 }
 </pre>
 		
