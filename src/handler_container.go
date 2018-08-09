@@ -5,6 +5,8 @@ import (
 	"bytes"
 	"net/http"
 	"github.com/gorilla/mux"
+	"time"
+	"log"
 )
 
 func renderContainerContent(id string) string {
@@ -22,11 +24,30 @@ func ViewContainer(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateContainer(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
 	router := CreateRouter()
-	newUrl, _ := router.Get("app_edit_container").URL("id", id)
+	newUrl, _ := router.Get("app_edit_container").URL("id", mux.Vars(r)["id"])
 
-	// Save container
+	saveContainer(r)
 
 	http.Redirect(w, r, newUrl.String(), http.StatusSeeOther)
+}
+
+func saveContainer(r *http.Request) {
+	redisClient := ConnectToRedis()
+	container := new(Container)
+	createdAt := time.Now()
+
+	r.ParseForm()
+	container.ID = r.FormValue("id")
+	container.Name = r.FormValue("name")
+	container.Ip = r.FormValue("ip")
+	container.CreatedAt = createdAt
+	container.Ports = r.FormValue("ports")
+	container.Status = true
+
+	containerRepository := NewContainerRepository(redisClient)
+	err := containerRepository.Persist(container)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
