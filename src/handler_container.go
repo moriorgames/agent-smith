@@ -6,8 +6,7 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"time"
-	"log"
-)
+	)
 
 func renderContainerContent(id string) string {
 	loadTemplateConfig()
@@ -46,8 +45,5 @@ func saveContainer(r *http.Request) {
 	container.Status = true
 
 	containerRepository := NewContainerRepository(redisClient)
-	err := containerRepository.Persist(container)
-	if err != nil {
-		log.Fatal(err)
-	}
+	containerRepository.Persist(container)
 }
