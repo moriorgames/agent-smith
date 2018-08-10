@@ -2,21 +2,18 @@ package smith
 
 import (
 	"testing"
-	"bufio"
-	"bytes"
+		"bytes"
+		"github.com/stretchr/testify/assert"
 )
 
 func TestTemplatingCanParseDataToTemplate(t *testing.T) {
-	var buffer bytes.Buffer
-	writer := bufio.NewWriter(&buffer)
 	loadTemplateConfig()
 	loadTemplates()
 	data := map[string]string{
-		"Name": "moriorgames",
+		"ContainerID": "123456",
 	}
-	renderTemplate(writer, "sample.html", data)
+	buf := bytes.NewBufferString("")
+	renderTemplate(buf, "container.html", data)
 
-	t.Logf("Result buffer: %s", buffer.String())
-
-	//assert.Equal(t, "my name is moriorgames", b.String())
+	assert.Contains(t, buf.String(), `action="/container/123456"`)
 }
