@@ -33,7 +33,10 @@ func renderContainer(id string) string {
 	loadTemplateConfig()
 	loadTemplates()
 	buf := new(bytes.Buffer)
-	renderTemplate(buf, "container.html", nil)
+	data := map[string]string{
+		"ID": id,
+	}
+	renderTemplate(buf, "container.html", data)
 
 	return buf.String()
 }
