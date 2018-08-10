@@ -45,3 +45,16 @@ func TestUpdateContainerRedirectsToEditView(t *testing.T) {
 
 	assert.Equal(t, rr.Code, http.StatusSeeOther)
 }
+
+func TestNewContainerCreatesUuidKey(t *testing.T) {
+	req, err := http.NewRequest("POST", "/container", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	router := CreateRouter()
+	router.ServeHTTP(rr, req)
+	//
+	//assert.Equal(t, rr.Code, http.StatusSeeOther)
+}

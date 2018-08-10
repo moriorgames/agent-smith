@@ -6,9 +6,30 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"time"
-	)
+	"github.com/satori/go.uuid"
+)
 
-func renderContainerContent(id string) string {
+func ViewContainer(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	fmt.Fprintf(w, renderContainer(id))
+}
+
+func SaveContainer(w http.ResponseWriter, r *http.Request) {
+	id := persistContainer(r)
+	router := CreateRouter()
+	newUrl, _ := router.Get("edit_container").URL("id", id)
+
+	http.Redirect(w, r, newUrl.String(), http.StatusSeeOther)
+}
+
+func DeleteContainer(w http.ResponseWriter, r *http.Request) {
+	router := CreateRouter()
+	newUrl, _ := router.Get("edit_container").URL("id", mux.Vars(r)["id"])
+
+	http.Redirect(w, r, newUrl.String(), http.StatusSeeOther)
+}
+
+func renderContainer(id string) string {
 	loadTemplateConfig()
 	loadTemplates()
 	buf := new(bytes.Buffer)
@@ -17,27 +38,17 @@ func renderContainerContent(id string) string {
 	return buf.String()
 }
 
-func ViewContainer(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
-	fmt.Fprintf(w, renderContainerContent(id))
-}
-
-func UpdateContainer(w http.ResponseWriter, r *http.Request) {
-	router := CreateRouter()
-	newUrl, _ := router.Get("app_edit_container").URL("id", mux.Vars(r)["id"])
-
-	saveContainer(r)
-
-	http.Redirect(w, r, newUrl.String(), http.StatusSeeOther)
-}
-
-func saveContainer(r *http.Request) {
+func persistContainer(r *http.Request) string {
 	redisClient := ConnectToRedis()
 	container := new(Container)
 	createdAt := time.Now()
 
 	r.ParseForm()
 	container.ID = r.FormValue("id")
+	if container.ID == "" {
+		id, _ := uuid.NewV4()
+		container.ID = id.String()
+	}
 	container.Name = r.FormValue("name")
 	container.Ip = r.FormValue("ip")
 	container.CreatedAt = createdAt
@@ -46,4 +57,6 @@ func saveContainer(r *http.Request) {
 
 	containerRepository := NewContainerRepository(redisClient)
 	containerRepository.Persist(container)
+
+	return container.ID
 }

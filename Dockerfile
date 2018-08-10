@@ -19,6 +19,7 @@ RUN         apk update \
             && go get -u github.com/moriorgames/agent-smith/src \
             && go get -u github.com/go-redis/redis \
             && go get -u github.com/stretchr/testify/assert \
+            && go get -u github.com/satori/go.uuid \
             && apk del git
 
 # Compile application in a single binary
