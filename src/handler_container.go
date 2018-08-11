@@ -33,8 +33,14 @@ func renderContainer(id string) string {
 	loadTemplateConfig()
 	loadTemplates()
 	buf := new(bytes.Buffer)
-	data := map[string]string{
-		"ID": id,
+	redisClient := ConnectToRedis()
+	containerRepository := NewContainerRepository(redisClient)
+	container, _ := containerRepository.FindByID(id)
+	// Anonymous struct
+	data := struct {
+		Container *Container
+	}{
+		container,
 	}
 	renderTemplate(buf, "container.html", data)
 
