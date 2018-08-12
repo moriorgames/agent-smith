@@ -13,7 +13,6 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
         "id":"fake-uuid",
         "name":"container_name",
         "image":"container_image",
-        "tag":"latest",
         "ip":"some_ip",
         "created_at":"2018-08-08T22:00:00.0+02:00",
         "ports":"8080:8080",
@@ -29,7 +28,6 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 	assert.Equal(t, container.ID, "fake-uuid")
 	assert.Equal(t, container.Name, "container_name")
 	assert.Equal(t, container.Image, "container_image")
-	assert.Equal(t, container.Tag, "latest")
 	assert.Equal(t, container.Ip, "some_ip")
 	assert.Equal(t, container.CreatedAt, createdAt)
 	assert.Equal(t, container.Ports, "8080:8080")
