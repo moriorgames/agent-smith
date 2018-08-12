@@ -1,11 +1,11 @@
 package smith
 
 import (
-	"fmt"
 	"bytes"
+	"fmt"
 	"net/http"
-	"github.com/gorilla/mux"
 	"time"
+	"github.com/gorilla/mux"
 	"github.com/satori/go.uuid"
 )
 
