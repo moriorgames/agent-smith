@@ -19,26 +19,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {{range .}}
                             <tr>
-                                <td class="font-bold">api-catalog</td>
+                                <td class="font-bold">{{.ContainerImage}}</td>
                                 <td>127.0.0.1</td>
-                                <td>3 minutes ago</td>
-                                <td>9090:9090</td>
+                                <td>{{.ContainerCreatedAt}}</td>
+                                <td>{{.ContainerPorts}}</td>
                                 <td class="text-success font-bold">Running</td>
                                 <td>
                                     <button class="btn btn-success btn-block">Actions</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="font-bold">website</td>
-                                <td>127.0.0.2</td>
-                                <td>6 days ago</td>
-                                <td>80:80/443:443</td>
-                                <td class="text-danger font-bold">Stopped</td>
-                                <td>
-                                    <button class="btn btn-success btn-block">Actions</button>
-                                </td>
-                            </tr>
+                            {{end}}
                             </tbody>
                         </table>
                     </div>

@@ -28,7 +28,6 @@ func TestTemplatingCanParseDataToTemplate(t *testing.T) {
 	}
 	buf := bytes.NewBufferString("")
 	renderTemplate(buf, "container.html", data)
-	//t.Logf("%s", buf)
 
 	assert.Contains(t, buf.String(), `action="/container/fake-uuid"`)
 }
