@@ -1,7 +1,7 @@
 # Build command:
 # docker build -t moriorgames/agent-smith .
 # Run command:
-# docker run -td --name agent_smith -p 9090:9090 moriorgames/agent-smith
+# docker run -td --name agent_smith -p 9090:9090 moriorgames/agent-smith --mount "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock"
 FROM        moriorgames/agent-smith-base:v1
 MAINTAINER  MoriorGames "moriorgames@gmail.com"
 

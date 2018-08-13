@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
   agent:
@@ -8,6 +8,10 @@ services:
     - "9090:9090"
     links:
     - redis:redis
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
 
   redis:
     image: redis
