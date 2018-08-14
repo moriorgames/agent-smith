@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	"github.com/docker/docker/client"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 type TableRow struct {
@@ -18,18 +18,14 @@ type TableRow struct {
 }
 
 func ViewHome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, renderHomeContent())
+	cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithVersion("v1.18"))
+	fmt.Fprintf(w, renderHomeContent(cli))
 }
 
-func renderHomeContent() string {
+func renderHomeContent(cli *client.Client) string {
 	loadTemplateConfig()
 	loadTemplates()
 	buf := new(bytes.Buffer)
-
-	cli, err := client.NewEnvClient()
-	if err != nil {
-		panic(err)
-	}
 
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
 	if err != nil {
