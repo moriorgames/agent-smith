@@ -11,7 +11,7 @@
                             <thead>
                             <tr>
                                 <th>CONTAINER</th>
-                                <th>IP</th>
+                                <th>COUNT</th>
                                 <th>IMAGE CREATED</th>
                                 <th>PORTS</th>
                                 <th>STATUS</th>
@@ -22,7 +22,7 @@
                             {{range .}}
                             <tr>
                                 <td class="font-bold">{{.ContainerImage}}</td>
-                                <td>127.0.0.1</td>
+                                <td>{{.ContainerCount}}</td>
                                 <td>{{.ContainerCreatedAt}}</td>
                                 <td>{{.ContainerPorts}}</td>
                                 <td class="text-success font-bold">Running</td>

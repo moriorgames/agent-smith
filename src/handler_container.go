@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 	"github.com/gorilla/mux"
 	"github.com/satori/go.uuid"
@@ -59,7 +60,7 @@ func persistContainer(r *http.Request) string {
 		container.ID = id.String()
 	}
 	container.Name = r.FormValue("name")
-	container.Ip = r.FormValue("ip")
+	container.Count, _ = strconv.Atoi(r.FormValue("count"))
 	container.CreatedAt = createdAt
 	container.Ports = r.FormValue("ports")
 	container.Status = true

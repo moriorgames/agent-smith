@@ -13,6 +13,7 @@ import (
 
 type TableRow struct {
 	ContainerImage     string
+	ContainerCount     int
 	ContainerCreatedAt string
 	ContainerPorts     string
 }
@@ -47,7 +48,12 @@ func renderHomeContent(cli *client.Client) string {
 			portString = strconv.Itoa(portPrivate) + ":" + strconv.Itoa(portPublic)
 		}
 
-		var row = TableRow{container.Image, createdAt.Format(time.RFC822), portString}
+		var row = TableRow{
+			container.Image,
+			3,
+			createdAt.Format(time.RFC822),
+			portString,
+		}
 		rows = append(rows, row)
 	}
 

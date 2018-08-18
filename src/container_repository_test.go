@@ -13,7 +13,7 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
         "id":"fake-uuid",
         "name":"container_name",
         "image":"container_image",
-        "ip":"some_ip",
+        "count":2,
         "created_at":"2018-08-08T22:00:00.0+02:00",
         "ports":"8080:8080",
         "status":true
@@ -28,7 +28,7 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 	assert.Equal(t, container.ID, "fake-uuid")
 	assert.Equal(t, container.Name, "container_name")
 	assert.Equal(t, container.Image, "container_image")
-	assert.Equal(t, container.Ip, "some_ip")
+	assert.Equal(t, container.Count, 2)
 	assert.Equal(t, container.CreatedAt, createdAt)
 	assert.Equal(t, container.Ports, "8080:8080")
 	assert.Equal(t, container.Status, true)
@@ -43,7 +43,7 @@ func TestRepositoryIsAbleToPersistModel(t *testing.T) {
 	createdAt, _ := time.Parse(time.RFC3339, "2018-08-08T22:00:00.0+02:00")
 	container.ID = "fake-uuid"
 	container.Name = "container_name"
-	container.Ip = "some_ip"
+	container.Count = 4
 	container.CreatedAt = createdAt
 	container.Ports = "8080:8080"
 	container.Status = true
