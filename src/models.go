@@ -6,10 +6,8 @@ type Container struct {
 	ID        string    `json:"id"`
 	Name      string    `json:"name"`
 	Image     string    `json:"image"`
-	Count     int       `json:"count"`
 	CreatedAt time.Time `json:"created_at"`
 	Ports     string    `json:"ports"`
-	Status    bool      `json:"status"`
 }
 
 type Image struct {
@@ -20,5 +18,7 @@ type Image struct {
 
 type Deploy struct {
 	Tag       string    `json:"tag"`
+	Count     int       `json:"count"`
 	CreatedAt time.Time `json:"created_at"`
+	Status    bool      `json:"status"`
 }

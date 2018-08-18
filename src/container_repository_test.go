@@ -13,10 +13,8 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
         "id":"fake-uuid",
         "name":"container_name",
         "image":"container_image",
-        "count":2,
         "created_at":"2018-08-08T22:00:00.0+02:00",
-        "ports":"8080:8080",
-        "status":true
+        "ports":"8080:8080"
     }`
 	mockClient.err = errors.New("error")
 
@@ -28,10 +26,8 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 	assert.Equal(t, "fake-uuid", container.ID)
 	assert.Equal(t, "container_name", container.Name)
 	assert.Equal(t, "container_image", container.Image)
-	assert.Equal(t, 2, container.Count)
 	assert.Equal(t, createdAt, container.CreatedAt)
 	assert.Equal(t, "8080:8080", container.Ports)
-	assert.Equal(t, true, container.Status)
 }
 
 func TestRepositoryIsAbleToPersistModel(t *testing.T) {
@@ -44,10 +40,8 @@ func TestRepositoryIsAbleToPersistModel(t *testing.T) {
 	container.ID = "fake-uuid"
 	container.Name = "container_name"
 	container.Image = "container_image"
-	container.Count = 4
 	container.CreatedAt = createdAt
 	container.Ports = "8080:8080"
-	container.Status = true
 
 	containerRepository := NewContainerRepository(mockClient)
 	result := containerRepository.Persist(container)
@@ -78,10 +72,8 @@ func TestRepositoryIsAbleToPersistModelOnProduction(t *testing.T) {
 	container.ID = "prod-fake-uuid"
 	container.Name = "prod_container_name"
 	container.Image = "prod_container_image"
-	container.Count = 99
 	container.CreatedAt = time.Now()
 	container.Ports = "443:443"
-	container.Status = true
 
 	containerRepository := NewContainerRepository(redisClient)
 	result := containerRepository.Persist(container)
@@ -101,7 +93,5 @@ func TestRepositoryIsAbleFindModelOnProduction(t *testing.T) {
 	assert.Equal(t, "prod-fake-uuid", container.ID)
 	assert.Equal(t, "prod_container_name", container.Name)
 	assert.Equal(t, "prod_container_image", container.Image)
-	assert.Equal(t, 99, container.Count)
 	assert.Equal(t, "443:443", container.Ports)
-	assert.Equal(t, true, container.Status)
 }

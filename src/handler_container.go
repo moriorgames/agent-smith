@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
-	"strconv"
 	"time"
 	"github.com/gorilla/mux"
 	"github.com/satori/go.uuid"
@@ -51,7 +50,6 @@ func renderContainer(id string) string {
 func persistContainer(r *http.Request) string {
 	redisClient := ConnectToRedis()
 	container := new(Container)
-	createdAt := time.Now()
 
 	r.ParseForm()
 	container.ID = r.FormValue("id")
@@ -60,10 +58,9 @@ func persistContainer(r *http.Request) string {
 		container.ID = id.String()
 	}
 	container.Name = r.FormValue("name")
-	container.Count, _ = strconv.Atoi(r.FormValue("count"))
-	container.CreatedAt = createdAt
+	container.Image = r.FormValue("image")
+	container.CreatedAt = time.Now()
 	container.Ports = r.FormValue("ports")
-	container.Status = true
 
 	containerRepository := NewContainerRepository(redisClient)
 	containerRepository.Persist(container)
