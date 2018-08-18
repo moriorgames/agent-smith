@@ -1,8 +1,8 @@
 package smith
 
 import (
-	"github.com/go-redis/redis"
 	"time"
+	"github.com/go-redis/redis"
 )
 
 type RedisConnectable interface {

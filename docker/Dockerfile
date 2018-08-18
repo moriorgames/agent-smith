@@ -7,8 +7,8 @@ MAINTAINER  MoriorGames "moriorgames@gmail.com"
 RUN         apk update \
             && apk upgrade \
             && apk add --no-cache bash git \
-            && go get -u github.com/docker/docker/api/types \
-            && go get -u github.com/docker/docker/client \
+            && go get -u github.com/docker/docker \
+            && go get -u github.com/docker/go-connections/nat \
             && go get -u github.com/go-redis/redis \
             && go get -u github.com/gorilla/mux \
             && go get -u github.com/oxtoacart/bpool \

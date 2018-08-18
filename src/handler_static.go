@@ -1,10 +1,10 @@
 package smith
 
 import (
-	"github.com/gorilla/mux"
-	"net/http"
 	"io/ioutil"
-	)
+	"net/http"
+	"github.com/gorilla/mux"
+)
 
 const CssPath string = "../static/css/"
 const JsPath string = "../static/js/"

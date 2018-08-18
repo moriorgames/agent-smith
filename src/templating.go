@@ -1,12 +1,12 @@
 package smith
 
 import (
-	"github.com/oxtoacart/bpool"
-	"html/template"
-	"path/filepath"
-	"log"
 	"fmt"
+	"html/template"
+	"log"
 	"io"
+	"path/filepath"
+	"github.com/oxtoacart/bpool"
 )
 
 type TemplateConfig struct {
