@@ -1,10 +1,10 @@
 package smith
 
 import (
-	"testing"
 	"errors"
-	"github.com/stretchr/testify/assert"
+	"testing"
 	"time"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRepositoryIsAbleFindModel(t *testing.T) {
@@ -25,24 +25,25 @@ func TestRepositoryIsAbleFindModel(t *testing.T) {
 
 	createdAt, _ := time.Parse(time.RFC3339, "2018-08-08T22:00:00.0+02:00")
 
-	assert.Equal(t, container.ID, "fake-uuid")
-	assert.Equal(t, container.Name, "container_name")
-	assert.Equal(t, container.Image, "container_image")
-	assert.Equal(t, container.Count, 2)
-	assert.Equal(t, container.CreatedAt, createdAt)
-	assert.Equal(t, container.Ports, "8080:8080")
-	assert.Equal(t, container.Status, true)
+	assert.Equal(t, "fake-uuid", container.ID)
+	assert.Equal(t, "container_name", container.Name)
+	assert.Equal(t, "container_image", container.Image)
+	assert.Equal(t, 2, container.Count)
+	assert.Equal(t, createdAt, container.CreatedAt)
+	assert.Equal(t, "8080:8080", container.Ports)
+	assert.Equal(t, true, container.Status)
 }
 
 func TestRepositoryIsAbleToPersistModel(t *testing.T) {
 	mockClient := new(RedisMock)
-	mockClient.result = "none"
+	mockClient.result = "OK"
 	mockClient.err = nil
 
 	container := new(Container)
 	createdAt, _ := time.Parse(time.RFC3339, "2018-08-08T22:00:00.0+02:00")
 	container.ID = "fake-uuid"
 	container.Name = "container_name"
+	container.Image = "container_image"
 	container.Count = 4
 	container.CreatedAt = createdAt
 	container.Ports = "8080:8080"
@@ -51,7 +52,7 @@ func TestRepositoryIsAbleToPersistModel(t *testing.T) {
 	containerRepository := NewContainerRepository(mockClient)
 	result := containerRepository.Persist(container)
 
-	assert.Equal(t, result, nil, "Values must be Equal.")
+	assert.Equal(t, nil, result)
 }
 
 func TestRepositoryIsNotAbleToPersistModel(t *testing.T) {
@@ -65,4 +66,42 @@ func TestRepositoryIsNotAbleToPersistModel(t *testing.T) {
 	result := containerRepository.Persist(container)
 
 	assert.Equal(t, result, errors.New("error"), "Values must be Equal.")
+}
+
+func TestRepositoryIsAbleToPersistModelOnProduction(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+	redisClient := ConnectToRedis()
+
+	container := new(Container)
+	container.ID = "prod-fake-uuid"
+	container.Name = "prod_container_name"
+	container.Image = "prod_container_image"
+	container.Count = 99
+	container.CreatedAt = time.Now()
+	container.Ports = "443:443"
+	container.Status = true
+
+	containerRepository := NewContainerRepository(redisClient)
+	result := containerRepository.Persist(container)
+
+	assert.Equal(t, nil, result)
+}
+
+func TestRepositoryIsAbleFindModelOnProduction(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+	redisClient := ConnectToRedis()
+
+	containerRepository := NewContainerRepository(redisClient)
+	container, _ := containerRepository.FindByID("prod-fake-uuid")
+
+	assert.Equal(t, "prod-fake-uuid", container.ID)
+	assert.Equal(t, "prod_container_name", container.Name)
+	assert.Equal(t, "prod_container_image", container.Image)
+	assert.Equal(t, 99, container.Count)
+	assert.Equal(t, "443:443", container.Ports)
+	assert.Equal(t, true, container.Status)
 }

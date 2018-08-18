@@ -28,7 +28,6 @@ func (r *RedisMock) Del(key string) (int64, error) {
 }
 
 func TestInterfaceRedisConnectable(t *testing.T) {
-
 	tests := map[string]struct {
 		mockClient     RedisConnectable
 		expectedResult string
@@ -62,7 +61,6 @@ func TestInterfaceRedisConnectable(t *testing.T) {
 }
 
 func TestIsNotAbleToConnectToRedis(t *testing.T) {
-
 	if !testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
@@ -76,7 +74,6 @@ func TestIsNotAbleToConnectToRedis(t *testing.T) {
 }
 
 func TestIsAbleToConnectToRedis(t *testing.T) {
-
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
@@ -90,7 +87,6 @@ func TestIsAbleToConnectToRedis(t *testing.T) {
 }
 
 func TestIsAbleToSetKeyOnRedis(t *testing.T) {
-
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
@@ -104,7 +100,6 @@ func TestIsAbleToSetKeyOnRedis(t *testing.T) {
 }
 
 func TestIsAbleToGetKeyOnRedis(t *testing.T) {
-
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
@@ -118,7 +113,6 @@ func TestIsAbleToGetKeyOnRedis(t *testing.T) {
 }
 
 func TestIsAbleToDeleteOneKeyOnRedis(t *testing.T) {
-
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
