@@ -9,11 +9,8 @@ RUN         apk update \
             && apk add --no-cache bash git \
             && go get -u github.com/docker/docker/api/types \
             && go get -u github.com/docker/docker/client \
-            && go get -u github.com/moriorgames/agent-smith/src \
             && go get -u github.com/go-redis/redis \
             && go get -u github.com/gorilla/mux \
             && go get -u github.com/oxtoacart/bpool \
             && go get -u github.com/satori/go.uuid \
-            && go get -u github.com/stretchr/testify/assert \
-            && apk del git
-
+            && go get -u github.com/stretchr/testify/assert
