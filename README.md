@@ -70,3 +70,14 @@ Remove volumes starting with character
 $ docker volume ls
 $ docker volume rm $(docker volume ls -q | grep "^0")
 ```
+
+
+# Vendoring on Golang
+
+To install the dependencies, manage and vendor it
+
+```
+$ dep ensure
+$ dep ensure -no-vendor
+$ dep ensure -vendor-only
+```
