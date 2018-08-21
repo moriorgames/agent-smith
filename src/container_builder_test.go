@@ -12,6 +12,6 @@ func TestContainerBuilderIsAbleToRemoveAndRunNewContainer(t *testing.T) {
 	container := new(Container)
 	container.Name = "node_server"
 	container.Image = "moriorgames/node-server"
-	cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithVersion("v1.18"))
+	cli, _ := client.NewEnvClient()
 	BuildContainerByParams(container, cli)
 }

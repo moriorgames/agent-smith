@@ -19,7 +19,7 @@ type TableRow struct {
 }
 
 func ViewHome(w http.ResponseWriter, r *http.Request) {
-	cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithVersion("v1.18"))
+	cli, _ := client.NewEnvClient()
 	fmt.Fprintf(w, renderHomeContent(cli))
 }
 

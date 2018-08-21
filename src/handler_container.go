@@ -54,7 +54,7 @@ func persistContainer(r *http.Request) string {
 	r.ParseForm()
 	container.ID = r.FormValue("id")
 	if container.ID == "" {
-		id, _ := uuid.NewV4()
+		id := uuid.NewV4()
 		container.ID = id.String()
 	}
 	container.Name = r.FormValue("name")

@@ -6,11 +6,7 @@ MAINTAINER  MoriorGames "moriorgames@gmail.com"
 # Install needed packages for GO
 RUN         apk update \
             && apk upgrade \
-            && apk add --no-cache bash git \
-            && go get -u github.com/docker/docker \
-            && go get -u github.com/docker/go-connections/nat \
-            && go get -u github.com/go-redis/redis \
-            && go get -u github.com/gorilla/mux \
-            && go get -u github.com/oxtoacart/bpool \
-            && go get -u github.com/satori/go.uuid \
-            && go get -u github.com/stretchr/testify/assert
+            && apk add --no-cache bash git curl
+
+# Go dependency package manager
+RUN         curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
