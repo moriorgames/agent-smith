@@ -1,7 +1,5 @@
 sudo: required
 
-language: go
-
 env:
 - IMAGE="moriorgames/agent-smith"
 
