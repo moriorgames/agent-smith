@@ -115,11 +115,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:38bed5c29e8cf2922dde226d64e4591ac104abf5e9b7e416a5b1c077e8f02403"
+  digest = "1:563d58d025a8a358848e13a8a1c2c3fffc782a3573f0c311f6a57c9f91c99853"
   name = "github.com/moriorgames/agent-smith"
   packages = ["src"]
   pruneopts = "UT"
-  revision = "20cd90f733e61124dc5eec7270e1affeddaab561"
+  revision = "2b819f2da79374aad6b91965b5739e628f86ca46"
 
 [[projects]]
   digest = "1:38ee335aedf4626620f3cf8f605661e71abdcce7b40b38921962beb3980f0a20"
